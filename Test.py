@@ -25,6 +25,7 @@ C = C.mergeAndReturn()
 
 
 userBase = User.createUserBase(A, B, C)
+User.setIDs(userBase)
 print(userBase)
 
 G1 = Graph(len(userBase))
