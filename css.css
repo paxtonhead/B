@@ -1,0 +1,184 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  font-size: 14px;
+}
+
+header {
+	overflow: hidden;
+	background-color: #fcfcfc;
+	padding: 20px 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+header a {
+	padding: 20px;
+	line-height: 25px;
+	font-family: "Arial", Arial, sans-serif;
+	font-size: 18px;
+	text-align: center;
+	color: #8BD6AF;
+	border-radius: 6px;
+	text-decoration: none;
+	float: left;
+}
+
+.logo {
+  display: table-cell;
+  line-height: 0;
+  width: 100%;
+}
+
+.logo img {
+  width: 30%;
+  height: auto;
+}
+
+.header-links {
+	float: right;
+}
+
+.outline {
+	font-weight: bold;
+	border: 1px solid #8BD6AF;
+	background-color: white;
+	color: #8BD6AF;
+}
+
+.outline:hover {
+	border: 1px solid #8BD6AF;
+	color: #ffffff;
+	background-color: #8BD6AF;
+}
+
+.search-box {
+	position: relative;
+	padding: 15px 0 0 0;
+	width: 50%;
+	margin: 0;
+}
+
+.search-form {
+	height: 40px;
+	border: 1px solid white;
+	border-radius: 5px;
+	background-color: #fff;
+	overflow: hidden;
+	box-shadow: 0px 0px 15px lightgrey;
+	border-bottom: 2px solid #8BD6AF;
+}
+
+::placeholder {
+	color: #8BD6AF;
+	opacity: 1;
+}
+
+::-ms-input-placeholder {
+	color: #8BD6AF;
+}
+
+.search-text {
+	font-size: 18px;
+	border-width: 0;
+	background: transparent;
+}
+
+.search-box input[type="text"] {
+	width: 90%;
+	padding: 9px 0 0 1em;
+	color: #333;
+	outline: none;
+}
+
+.search-button {
+	position: absolute;
+	top: 15;
+	right: 0;
+	height: 42px;
+	width: 40px;
+	border-width: 0;
+	background-color: #8BD6AF;
+	border-radius: 0 5px 5px 0;
+	cursor: pointer;
+}
+
+body {
+	margin: 0;
+	font-family: Arial;
+}
+
+.header {
+	text-align: center;
+	padding: 32px;
+}
+
+.wrapped {
+	padding: 20 20;
+}
+
+.row {
+	display: flex;
+	padding: 0 px;
+}
+
+.column {
+	max-width: 25%;
+	padding: 0 4px;
+}
+
+.column img {
+	margin-top: 8px;
+	vertical-align: middle;
+}
+
+.overlay-wrap {
+	position: relative;
+	width: 100%;
+}
+
+.overlay {
+	position: absolute;
+	top: 70%;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 30%;
+	width: 100%;
+	opacity: 0;
+	transition: .1s ease;
+	background-color: #8BD6AF;
+}
+
+.overlay-wrap:hover .overlay {
+	opacity: .9;
+}
+
+.text {
+	color: white;
+	font-size: 16px;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+
+.navbar {
+	overflow: hidden;
+	background-color: #8BD6AF;
+}
+
+.navbar a {
+	float: left;
+	display: block;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 14px;
+	text-decoration: none;
+}
