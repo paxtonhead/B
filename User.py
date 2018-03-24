@@ -1,6 +1,6 @@
 class User:
 
-  def __init__(self, name, iden, w, h, loc):
+  def __init__(self, name, w, h, loc, iden=0):
     self.username = name
     self.ID = iden
     self.wants = w
@@ -27,3 +27,8 @@ class User:
     for i in users:
       base.append(i)
     return base
+  
+  @staticmethod
+  def setIDs(base):
+    for count, user in enumerate(base):
+      user['ID'] = count
