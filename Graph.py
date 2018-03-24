@@ -4,13 +4,17 @@ class Graph:
 
   def __init__(self, ver):
     self.V = ver
-    self.graph = defaultdict(set)
+    self.IDGraph = defaultdict(set)
+    self.UsernameGraph = defaultdict(set)
     self.counter = 0
     self.connectedComponents = defaultdict(set)
     self.userBase = []
 
   def addEdge(self, u, v):
-    self.graph[u].add(v)
+    if isinstance(u, int):
+      self.IDGraph[u].add(v)
+    elif isinstance(u, str):
+      self.UsernameGraph[u].add(v)
 
   def setUserBase(self, ub):
     self.userBase = ub
@@ -18,8 +22,17 @@ class Graph:
   def getUserBase(self):
     return self.userBase
 
-  def printGraph(self):
-    print(self.graph)
+  def getGraph(self, check):
+    if check:
+      return self.UsernameGraph
+    else:
+      return self.IDGraph
+
+  def printGraph(self, check):
+    if check:
+      print(self.UsernameGraph)
+    else:
+      print(self.IDGraph)
 
   def printuserBase(self):
     print(self.userBase)
@@ -31,7 +44,7 @@ class Graph:
     return self.connectedComponents
 
 
-  def fillGraph(self):
+  def fillGraphs(self):
     for i in self.userBase: 
       for user in self.userBase:
 
@@ -43,6 +56,19 @@ class Graph:
           for haves in user['HAVE']:
             if wants == haves:
               self.addEdge(i['ID'], user['ID'])
+
+    for i in self.userBase: 
+      for user in self.userBase:
+
+      # Continues to avoid comparing user to themselves
+        if user is i:
+          continue
+
+        for wants in i['WANT']:
+          for haves in user['HAVE']:
+            if wants == haves:
+              self.addEdge(i['USERNAME'], user['USERNAME'])
+      
 
 
   def convertIDToUsername(self, D):
@@ -59,7 +85,7 @@ class Graph:
 
     return D
 
-  
+
   def findWholeMatch(self, initialUser):
     initialUser = self.userBase[0]
     half_match = []
@@ -90,21 +116,8 @@ class Graph:
 
     return full_match
 
-
-  # A function used by DFS
-  def DFSUtil(self,v,visited):
-    # Mark the current node as visited and print it
-    visited[v]= True
-    self.connectedComponents[self.counter].add(v)
-    #Recur for all the vertices adjacent to this vertex
-    for i in self.graph[v]:
-      if visited[i]==False:
-        self.DFSUtil(i,visited) 
-
-    self.counter += 1
-    return self.connectedComponents
-
-
+  ######################################Start of SCC algo###################################################
+  ##########################################################################################################
   # The main function that finds and prints all strongly
   # connected components
   def calcSCCs(self):
@@ -115,8 +128,8 @@ class Graph:
       g = Graph(self.V)
 
       # Recur for all the vertices adjacent to this vertex
-      for i in self.graph:
-          for j in self.graph[i]:
+      for i in self.IDGraph:
+          for j in self.IDGraph[i]:
               g.addEdge(j,i)
       return g
 
@@ -125,7 +138,7 @@ class Graph:
       # Mark the current node as visited 
       visited[v]= True
       #Recur for all the vertices adjacent to this vertex
-      for i in self.graph[v]:
+      for i in self.IDGraph[v]:
           if visited[i]==False:
               fillOrder(i, visited, stack)
       stack = stack.append(v)
@@ -137,16 +150,14 @@ class Graph:
       visited[v]= True
       self.connectedComponents[self.counter].add(v)
       #Recur for all the vertices adjacent to this vertex
-      for i in self.graph[v]:
+      for i in self.IDGraph[v]:
         if visited[i]==False:
           DFSUtil(i,visited) 
 
       self.counter += 1
       return self.connectedComponents
     
-    
-    
-    
+
     stack = []
     # Mark all the vertices as not visited (For first DFS)
     visited = [False]*(self.V)
@@ -166,8 +177,8 @@ class Graph:
     while stack:
         i = stack.pop()
         if visited[i]==False:
-            self.connectedComponents = gr.DFSUtil(i, visited)
+            self.connectedComponents = DFSUtil(i, visited)
 
     return self.connectedComponents
-
+  ##########################################################################################################
 
