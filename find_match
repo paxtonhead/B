@@ -30,7 +30,7 @@ def findMatch(initial_user):
 
 user1 = {'USERNAME': 'Scott', 'WANT': ['Modern Warfare 2', 'Hunger Games', 'Monopoly'], 
         'HAVE': ['Fortnite', 'Super Smash Bros', 'Star Wars: A New Hope']}
-user2 = {'USERNAME': 'Conner', 'WANT': ['Star Wars: A New Hope', 'Hunger Games 2'], 
+user2 = {'USERNAME': 'Connor', 'WANT': ['Star Wars: A New Hope', 'Hunger Games 2'], 
         'HAVE': ['Monopoly', 'Sorry', 'Clue']}
 
 user_base = [user1, user2]
