@@ -1,3 +1,5 @@
+from Graph import Graph
+
 def findWholeMatch(initial_user):
   half_match = []
   full_match = {}
@@ -28,8 +30,7 @@ def findWholeMatch(initial_user):
   return full_match
 
 
-def findHalfMatch(initial_user):
-  half_match = []
+def fillGraph(G, initial_user):
 
   for user in user_base1:
 
@@ -40,37 +41,62 @@ def findHalfMatch(initial_user):
     for wants in initial_user['WANT']:
       for haves in user['HAVE']:
         if wants == haves:
-          half_match.append(user['USERNAME'])
+          G.addEdge(initial_user['ID'], user['ID'])
 
-  return half_match
-          
-#########################################################################################################
-A = {'USERNAME': 'A', 'WANT': [1, 5], 'HAVE': [2, 6]}
-B = {'USERNAME': 'B', 'WANT': [3, 5], 'HAVE': [1, 2]}
-C = {'USERNAME': 'C', 'WANT': [2, 3], 'HAVE': [1, 7]}
-D = {'USERNAME': 'D', 'WANT': [4, 6], 'HAVE': [3, 5]}
-E = {'USERNAME': 'E', 'WANT': [1, 7], 'HAVE': [3, 6]}
+  return G
 
-user_base1 = [A, B, C, D, E]
 
-findHalfMatch(A)
+def convertIDToUsername(IDs):
+  result = set()
 
-G = {}
+  for users in user_base1:
+    for i in IDs:
+      if users['ID'] == i:
+        result.add(users['USERNAME'])
 
-for node in user_base1:
-  G[node['USERNAME']] = findHalfMatch(node)
+  return result
 
-print(G)
-#########################################################################################################
 
-#########################################################################################################
-user1 = {'USERNAME': 'Scott', 'WANT': ['Modern Warfare 2', 'Hunger Games', 'Monopoly'], 
-        'HAVE': ['Fortnite', 'Super Smash Bros', 'Star Wars: A New Hope']}
-user2 = {'USERNAME': 'Conner', 'WANT': ['Star Wars: A New Hope', 'Hunger Games 2'], 
-        'HAVE': ['Monopoly', 'Sorry', 'Clue']}
 
-user_base2 = [user1, user2]
 
-print(findWholeMatch(user1))
-#########################################################################################################
+
+
+if __name__ == '__main__':          
+  #########################################################################################################
+  A = {'USERNAME': 'A', 'ID': 0, 'WANT': [1], 'HAVE': [2]}
+  B = {'USERNAME': 'B', 'ID': 1, 'WANT': [3], 'HAVE': [1]}
+  C = {'USERNAME': 'C', 'ID': 2, 'WANT': [2], 'HAVE': [3]}
+  D = {'USERNAME': 'D', 'ID': 3, 'WANT': [], 'HAVE': []}
+  E = {'USERNAME': 'E', 'ID': 4, 'WANT': [], 'HAVE': []}
+
+  user_base1 = [A, B, C, D, E]
+
+  G = Graph(len(user_base1))
+
+  for i in user_base1:
+    fillGraph(G, i)
+
+  G.printGraph()
+
+  strong = G.calcSCCs()
+  print(strong)
+
+  for key, value in strong.items():
+      # do something with value
+      strong[key] = convertIDToUsername(value)
+
+  print(strong)
+
+  #########################################################################################################
+
+  #########################################################################################################
+  user1 = {'USERNAME': 'Scott', 'WANT': ['Modern Warfare 2', 'Hunger Games', 'Monopoly'], 
+          'HAVE': ['Fortnite', 'Super Smash Bros', 'Star Wars: A New Hope']}
+  user2 = {'USERNAME': 'Conner', 'WANT': ['Star Wars: A New Hope', 'Hunger Games 2'], 
+          'HAVE': ['Monopoly', 'Sorry', 'Clue']}
+
+  user_base2 = [user1, user2]
+
+  #print(findWholeMatch(user1))
+  #########################################################################################################
 
