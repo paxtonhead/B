@@ -1,7 +1,11 @@
 from Graph import Graph
+from Place import Place
 
 user_base1 = None
 user_base2 = None
+
+API_KEY = 'AIzaSyBoE7AXEdbfic8WGVoSTyXRayhVQX1WXHg'
+
 
 # def findWholeMatch(initial_user):
 #   half_match = []
@@ -62,29 +66,26 @@ user_base2 = None
 
 ####################GRAPH TESTING#################################          
 #########################################################################################################
-A = {'USERNAME': 'A', 'ID': 0, 'WANT': [1], 'HAVE': [3]}
-B = {'USERNAME': 'B', 'ID': 1, 'WANT': [3], 'HAVE': [1]}
-C = {'USERNAME': 'C', 'ID': 2, 'WANT': [6], 'HAVE': [7]}
-D = {'USERNAME': 'D', 'ID': 3, 'WANT': [], 'HAVE': []}
-E = {'USERNAME': 'E', 'ID': 4, 'WANT': [], 'HAVE': []}
+A = {'USERNAME': 'A', 'LOCATION': 'Earl Gregg Swem Library Williamsburg, VA', 'ID': 0, 'WANT': [1], 'HAVE': [3]}
+B = {'USERNAME': 'B', 'LOCATION': 'Kaplan Arena Williamsburg, VA', 'ID': 1, 'WANT': [3], 'HAVE': [1]}
+C = {'USERNAME': 'C', 'LOCATION': 'Sadler Center Williamsburg, VA', 'ID': 2, 'WANT': [6], 'HAVE': [7]}
+# D = {'USERNAME': 'D', 'ID': 3, 'WANT': [], 'HAVE': []}
+# E = {'USERNAME': 'E', 'ID': 4, 'WANT': [], 'HAVE': []}
 
-user_base1 = [A, B, C, D, E]
+user_base1 = [A, B, C,]
 
 G1 = Graph(len(user_base1))
-
 G1.setUserBase(user_base1)
-
 G1.fillGraph()
- 
 G1.printGraph()
 
 strong = G1.calcSCCs()
-
 strong = G1.convertIDToUsername(strong)
-
 print(strong)
 
 print(G1.findWholeMatch(1))
+
+
 
 #########################################################################################################
 
